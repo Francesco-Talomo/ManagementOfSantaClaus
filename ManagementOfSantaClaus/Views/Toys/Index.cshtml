@@ -1,0 +1,17 @@
+﻿@model ManagementOfSantaClaus.Models.Toys
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@foreach (var toy in Model.EntityList)
+{
+  <hr />
+  <div class="row">
+    <div class="col-xs-8"><h4>@Html.ActionLink(toy.Name, "Details", new { name = toy.Name })</h4></div>
+    <div class="col-xs-2">@Html.ActionLink(" Edit", "Edit", new { name = toy.Name }, new { @class = "btn btn-default glyphicon glyphicon-pencil" })</div>
+    <div class="col-xs-2"> @Html.ActionLink(" Delete", "Delete", new { name = toy.Name, id = toy.ID }, new { @class = "btn btn-danger glyphicon glyphicon-trash" })</div>
+  </div>
+}
