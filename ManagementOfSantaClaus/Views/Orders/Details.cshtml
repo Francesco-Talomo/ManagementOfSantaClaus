@@ -43,15 +43,32 @@
     <dd>
       @foreach (var toy in Model.Toys)
       {
-        @Html.DisplayFor(model => toy.Name)
-        <br />
+        foreach (var toyColor in Model.ToyList)
+        {
+          if (toyColor.Name == toy.Name)
+          {
+            if (toyColor.Amount > 0 || Model.Status.Equals(StatusType.Done) || Model.Status.Equals(StatusType.Ready))
+            {
+              @Html.DisplayFor(model => toy.Name)
+              <br />
+            }
+            else
+            {
+              Model.EditToys = false;
+              <font color="red">
+                @Html.DisplayFor(model => toy.Name)
+              </font>
+              <br />
+            }
+          }
+        }
       }
     </dd>
 
     @if (Session["IsAdmin"].Equals(true))
     {
       <dt>
-        @Html.DisplayName("Tot Cost")
+        @Html.DisplayName("Tot Cost €")
       </dt>
 
       <dd>
@@ -72,7 +89,7 @@
 </div>
 <p>
   @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-primary" })
-  @if (Session["IsAdmin"].Equals(false) && !Model.Status.Equals(StatusType.Done))
+  @if (Session["IsAdmin"].Equals(false) && !Model.Status.Equals(StatusType.Done) && Model.EditToys)
   {
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" })
   }

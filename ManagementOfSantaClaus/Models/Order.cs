@@ -21,5 +21,7 @@ namespace ManagementOfSantaClaus.Models
     public List<Toy> ToyList { get; set; }
 
     public decimal TotCost { get; set; }
+
+    public bool EditToys { get;  set; }
   }
 }

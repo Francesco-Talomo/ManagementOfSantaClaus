@@ -28,7 +28,7 @@ namespace ManagementOfSantaClaus.Controllers
 
     public ActionResult Details(string id)
     {
-      if (Session["IsAdmin"] != null)
+      if (Session["IsAdmin"] != null && Session["IsAdmin"].Equals(true))
       {
         Classes.MongoDB db = new Classes.MongoDB();
         var order = db.GetOrder(id);
@@ -40,6 +40,7 @@ namespace ManagementOfSantaClaus.Controllers
         model.Date = order.Date;
         model.Toys = order.Toys;
         model.ToyList = toys.ToList();
+        model.EditToys = true;
         return View(model);
       }
       else
@@ -55,12 +56,15 @@ namespace ManagementOfSantaClaus.Controllers
         Classes.MongoDB db = new Classes.MongoDB();
         ViewBag.StatusTypes = new StatusTypes();
         var order = db.GetOrder(id);
-        Classes.Order model = new Classes.Order();
+        var toys = db.GetAllToys();
+        Models.Order model = new Models.Order();
         model.Id = order.Id;
         model.Kid = order.Kid;
         model.Status = order.Status;
         model.Date = order.Date;
         model.Toys = order.Toys;
+        model.ToyList = toys.ToList();
+        model.EditToys = true;
         return View(model);
       }
       else

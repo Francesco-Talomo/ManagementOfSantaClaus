@@ -43,13 +43,11 @@ div.navbar-header img {
 }
 
 table.table tbody tr {
-  transition: filter 2s;
+  transition: background-color 2s;
 }
 
   table.table tbody tr:hover {
-    /*background-color: rgba(1, 1, 1, 0.1);*/
-    /*filter: brightness(90%);*/ /*grayscale(50%);*/
-    opacity: 0.75;
+    background-color: lightgrey;
     box-shadow: inset 0 0 0 1px black;
   }
 
@@ -73,46 +71,3 @@ img.img-responsive {
   width: 60px;
   height: 60px;
 }
-/*
-.navbar {
-  background-color: black;
-}
-
-.nav navbar-nav li a {
-  text-decoration: white;
-}
-
-  .nav navbar-nav li a:hover {
-    background-color: green;
-  }
-
-.navbar-brand a img {
-  height: 30px;
-  width: 30px;
-}
-
-.navbar-toggle {
-  background-color: white;
-}*/
-
-/*.icon-bar {
-  background-color: black;
-}
-
-.sr-only {
-  background-color: white;
-}
-
-.btn {
-  outline: none;
-}
-
-.btn-default:hover {
-  border: 2px solid green;
-  background-color: green;
-}
-
-.bg-gray:hover {
-  border: 2px solid green;
-  background-color: green;
-}*/

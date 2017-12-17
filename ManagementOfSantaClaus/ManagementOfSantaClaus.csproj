@@ -181,8 +181,10 @@
     <Content Include="Image\logout.jpg" />
     <Content Include="Image\natale_stelline_palle.jpg" />
     <Content Include="Image\navbar.jpg" />
+    <Content Include="Image\presents.jpg" />
     <Content Include="Image\pupazzo-fiocco-neve.jpg" />
     <Content Include="Image\pupazzo-neve-cappello2.jpg" />
+    <Content Include="Image\toys.jpg" />
     <Content Include="Image\Toys\Barbie doll.jpg" />
     <Content Include="Image\Toys\Football shirt.jpg" />
     <Content Include="Image\Toys\Hot Wheels track.jpg" />

@@ -28,22 +28,49 @@
   {
     <hr />
     <div class="row">
-      @if (Session["IsAdmin"].Equals(true))
+      @if (toy.Amount > 0)
       {
-        <div class="col-md-3"><h4>@toy.Name</h4></div>
-        <div class="col-md-3">
-          <img class="img-responsive" src="@(String.Format("../Image/Toys/{0}.jpg", toy.Name))" />
-        </div>
-        <div class="col-md-3"><h4>@toy.Amount</h4></div>
-        <div class="col-md-3"><h4>@toy.Cost</h4></div>
+        if (Session["IsAdmin"].Equals(true))
+        {
+          <div class="col-md-3"><h4>@toy.Name</h4></div>
+          <div class="col-md-3">
+            <img class="img-responsive" src="@(String.Format("../Image/Toys/{0}.jpg", toy.Name))" />
+          </div>
+          <div class="col-md-3"><h4>@toy.Amount</h4></div>
+          <div class="col-md-3"><h4>@toy.Cost</h4></div>
+        }
+        else
+        {
+          <div class="col-md-4"><h4>@toy.Name</h4></div>
+          <div class="col-md-4">
+            <img class="img-responsive" src="@(String.Format("../Image/Toys/{0}.jpg", toy.Name))" />
+          </div>
+          <div class="col-md-4"><h4>@toy.Amount</h4></div>
+        }
       }
       else
       {
-        <div class="col-md-4"><h4>@toy.Name</h4></div>
-        <div class="col-md-4">
-          <img class="img-responsive" src="@(String.Format("../Image/Toys/{0}.jpg", toy.Name))" />
-        </div>
-        <div class="col-md-4"><h4>@toy.Amount</h4></div>
+        <font color="red">
+          @if (Session["IsAdmin"].Equals(true))
+          {
+            <div class="col-md-3">
+              <h4>@toy.Name</h4>
+            </div>
+            <div class="col-md-3">
+              <img class="img-responsive" src="@(String.Format("../Image/Toys/{0}.jpg", toy.Name))" />
+            </div>
+            <div class="col-md-3"><h4>@toy.Amount</h4></div>
+            <div class="col-md-3"><h4>@toy.Cost</h4></div>
+          }
+          else
+          {
+            <div class="col-md-4"><h4>@toy.Name</h4></div>
+            <div class="col-md-4">
+              <img class="img-responsive" src="@(String.Format("../Image/Toys/{0}.jpg", toy.Name))" />
+            </div>
+            <div class="col-md-4"><h4>@toy.Amount</h4></div>
+          }
+        </font>
       }
     </div>
   }

@@ -1,5 +1,5 @@
 ﻿@using ManagementOfSantaClaus.Classes
-@model ManagementOfSantaClaus.Classes.Order
+@model ManagementOfSantaClaus.Models.Order
 
 @{
   ViewBag.Title = "Edit";
@@ -64,13 +64,30 @@
         @Html.LabelFor(model => model.Toys, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
           @foreach (var toy in Model.Toys)
-        {
-            @Html.DisplayFor(model => toy.Name)
-            <br />
+          {
+            foreach (var toyColor in Model.ToyList)
+            {
+              if (toyColor.Name == toy.Name)
+              {
+                if (toyColor.Amount > 0 || Model.Status.Equals(StatusType.Done) || Model.Status.Equals(StatusType.Ready))
+                {
+                  @Html.DisplayFor(model => toy.Name)
+                  <br />
+                }
+                else
+                {
+                  Model.EditToys = false;
+                  <font color="red">
+                    @Html.DisplayFor(model => toy.Name)
+                  </font>
+                  <br />
+                }
+              }
+            }
           }
         </div>
       </div>
-      @if (!Model.Status.Equals(StatusType.Done))
+      @if (Session["IsAdmin"].Equals(false) && !Model.Status.Equals(StatusType.Done) && Model.EditToys)
       {
         <div class="form-group">
           <div class="col-md-offset-2 col-md-10">

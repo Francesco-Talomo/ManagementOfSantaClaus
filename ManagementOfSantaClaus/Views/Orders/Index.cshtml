@@ -18,7 +18,7 @@
         @if (Session["IsAdmin"].Equals(true))
       {
           <th>
-            @Html.Raw("Tot Cost")
+            @Html.Raw("Tot Cost €")
           </th>
         }
         else
@@ -62,14 +62,14 @@
               {
                 if (toyColor.Name == toy.Name)
                 {
-                  if (toyColor.Amount == 0)
+                  if (toyColor.Amount >0 || order.Status.Equals(StatusType.Done) || order.Status.Equals(StatusType.Ready))
                   {
-                    @Html.ActionLink(toy.Name.ToString(), "Details", new { id = order.Id }, new { @style = "color:red", toy = toy.ToString() })
-                    editToys=false;
+                    @Html.ActionLink(toy.Name.ToString(), "Details", new { id = order.Id }, new { toy = toy.ToString() })
                   }
                   else
                   {
-                    @Html.ActionLink(toy.Name.ToString(), "Details", new { id = order.Id }, new { toy = toy.ToString() })
+                    @Html.ActionLink(toy.Name.ToString(), "Details", new { id = order.Id }, new { @style = "color:red", toy = toy.ToString() })
+                    editToys = false;
                   }
                 }
               }
@@ -104,18 +104,3 @@
   </table>
 </div>
 @Html.ActionLink("Back", "../Home", null, new { @class = "btn btn-primary" })
-
-@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
-  <script type="text/javascript">
-      jQuery( function($) {
-        $('tbody tr').addClass('clickable').click(function () {
-          window.location = $(this).find('td').attr('Details');
-          }).find('a').hover( function() {
-              $(this).parents('tr').unbind('click');
-          }, function() {
-              $(this).parents('tr').click( function() {
-                window.location = $(this).find('td').attr('Details');
-              });
-          });
-      });
-  </script>*@
