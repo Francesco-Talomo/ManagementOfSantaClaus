@@ -7,7 +7,7 @@ namespace ManagementOfSantaClaus.Classes
   {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public string ID { get; set; }
+    public string Id { get; set; }
 
     [BsonElement("screenname")]
     public string ScreenName { get; set; }
@@ -21,7 +21,6 @@ namespace ManagementOfSantaClaus.Classes
     [BsonElement("password")]
     public string Password { get; set; }
 
-    [BsonIgnoreIfNull]
     [BsonElement("password_clear_text")]
     public string PasswordClearText { get; set; }
   }

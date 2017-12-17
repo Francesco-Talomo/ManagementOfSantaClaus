@@ -5,6 +5,10 @@ namespace ManagementOfSantaClaus.Models
 {
   public class Orders
   {
-    public List<Order> EntityList { get; set; }
+    public List<Classes.Order> EntityList { get; set; }
+
+    public List<Toy> ToyList { get; set; }
+
+    public decimal TotCost { get; set; }
   }
 }

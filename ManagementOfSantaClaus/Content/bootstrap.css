@@ -1922,7 +1922,7 @@ textarea.input-lg {
 }
 
 .form-control-static {
-  padding-top: 7px;
+  padding-top: 0;
   margin-bottom: 0;
 }
 
@@ -1961,7 +1961,7 @@ textarea.input-lg {
 .form-horizontal .checkbox,
 .form-horizontal .radio-inline,
 .form-horizontal .checkbox-inline {
-  padding-top: 7px;
+  padding-top: 0;
   margin-top: 0;
   margin-bottom: 0;
 }

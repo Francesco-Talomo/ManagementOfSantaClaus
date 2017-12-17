@@ -1,10 +1,7 @@
 ﻿using ManagementOfSantaClaus.Classes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ManagementOfSantaClaus.Controllers
@@ -28,19 +25,18 @@ namespace ManagementOfSantaClaus.Controllers
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < resultHash.Length; i++)
         {
-          result.Append(resultHash[i].ToString("X2"));
+          result.Append(resultHash[i].ToString("X2").ToLower());
         }
         return result.ToString();
       }
-      user.Password = Encrypt(user.Password);
       Classes.MongoDB db = new Classes.MongoDB();
+      user.Password = Encrypt(user.Password);
       var usr = db.GetUser(user);
 
       if (usr != null)
       {
         Session["ScreenName"] = usr.ScreenName.ToString();
-        Session["Id"] = usr.ID.ToString();
-        Session["Password"] = Encrypt(user.Password);
+        Session["IsAdmin"] = Convert.ToBoolean(usr.IsAdmin.ToString());
         return RedirectToAction("../Home");
       }
       else
@@ -52,7 +48,7 @@ namespace ManagementOfSantaClaus.Controllers
 
     public ActionResult Logout()
     {
-      if (Session["Id"] != null)
+      if (Session["IsAdmin"] != null)
       {
         Session.Clear();
         return RedirectToAction("Logout");

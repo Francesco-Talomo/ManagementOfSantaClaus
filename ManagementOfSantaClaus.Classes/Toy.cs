@@ -7,7 +7,7 @@ namespace ManagementOfSantaClaus.Classes
   {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public string ID { get; set; }
+    public string Id { get; set; }
 
     [BsonElement("name")]
     public string Name { get; set; }

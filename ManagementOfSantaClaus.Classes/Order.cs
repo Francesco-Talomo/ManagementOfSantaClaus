@@ -9,15 +9,15 @@ namespace ManagementOfSantaClaus.Classes
   {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public string ID { get; set; }
+    public string Id { get; set; }
 
     [BsonElement("kid")]
     public string Kid { get; set; }
 
     [BsonElement("status")]
-    public bool Status { get; set; }
+    public StatusType Status { get; set; }
 
-    [BsonElement("toy")]
+    [BsonElement("toys")]
     public List<Toy> Toys { get; set; }
 
     [BsonDateTimeOptions(Kind = DateTimeKind.Local)]

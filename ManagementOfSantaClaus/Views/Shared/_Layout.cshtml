@@ -1,43 +1,97 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Applicazione ASP.NET</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@ViewBag.Title - Applicazione ASP.NET</title>
+  @Styles.Render("~/Content/css")
+  @Scripts.Render("~/bundles/modernizr")
+  @Styles.Render("~/Content/MyStyle.css")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Nome applicazione", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Chi siamo", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contatti", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Applicazione ASP.NET</p>
-        </footer>
-    </div>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand">
+          <img  alt="Brand" src="~/Image/golden-snowflake-symbol.jpg" />
+        </a>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        @if (Session["ScreenName"] != null)
+        {
+          @Html.ActionLink(Session["ScreenName"].ToString(), "Index", "Home", new { area = "" }, new { @class = "navbar-brand", style = "color:red;" })
+        }
+        else
+        {
+          @Html.ActionLink("Management for Christmas ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        }
+      </div>
+      <div class="navbar-collapse collapse">
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+        @switch (Session["IsAdmin"])
+        {
+          case false:
+            <ul class="nav navbar-nav">
+              <li>@Html.ActionLink("Home", "Index", "Home")</li>
+              <li>@Html.ActionLink("Toys", "Index", "Toys")</li>
+              <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
+              <li>@Html.ActionLink("About", "About", "Home")</li>
+              <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li>@Html.ActionLink("Log Out", "Logout", "Users")</li>
+              <li class="navbar-brand">
+                <img alt="Brand" src="~/Image/golden-snowflake-symbol.jpg" />
+              </li>
+            </ul>
+            break;
+          case true:
+            <ul class="nav navbar-nav">
+              <li>@Html.ActionLink("Home", "Index", "Home")</li>
+              <li>@Html.ActionLink("Toys", "Index", "Toys")</li>
+              <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
+              <li>@Html.ActionLink("About", "About", "Home")</li>
+              <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li>@Html.ActionLink("Log Out", "Logout", "Users")</li>
+              <li class="navbar-brand">
+                <img alt="Brand" src="~/Image/golden-snowflake-symbol.jpg" />
+              </li>
+            </ul>
+            break;
+          default:
+            <ul class="nav navbar-nav">
+              <li>@Html.ActionLink("Home", "Index", "Home")</li>
+              <li>@Html.ActionLink("About", "About", "Home")</li>
+              <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            </ul>              
+            <ul class="nav navbar-nav navbar-right">
+                <li>@Html.ActionLink("Log In", "Login", "Users")</li>
+              <li class="navbar-brand">
+                <img alt="Brand" src="~/Image/golden-snowflake-symbol.jpg" />
+              </li>
+              </ul>
+            break;
+        }
+      </div>
+
+    </div>
+  </div>
+  <div class="container body-content">
+    @RenderBody()
+    <hr />
+    <footer>
+      <p>&copy; @DateTime.Now.Year - Management for Christmas ASP.NET</p>
+    </footer>
+  </div>
+
+  @Scripts.Render("~/bundles/jquery")
+  @Scripts.Render("~/bundles/bootstrap")
+  @RenderSection("scripts", required: false)
 </body>
 </html>

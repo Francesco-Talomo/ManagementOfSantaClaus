@@ -1,0 +1,53 @@
+﻿
+@{
+  ViewBag.Title = "MissingToy";
+}
+
+<h2 class="alert-danger" style="text-align:center;">Missing toys check which ones</h2>
+
+<h2>Toys</h2>
+<hr />
+
+<div class="jumbotron">
+  <div class="row">
+    @if (Session["IsAdmin"].Equals(true))
+      {
+      <div class="col-md-3"><h3>Name</h3></div>
+      <div class="col-md-3"><h3>Picture</h3></div>
+      <div class="col-md-3"><h3>Amount</h3></div>
+      <div class="col-md-3"><h3>Cost</h3></div>
+    }
+    else
+    {
+      <div class="col-md-4"><h3>Name</h3></div>
+      <div class="col-md-4"><h3>Picture</h3></div>
+      <div class="col-md-4"><h3>Amount</h3></div>
+    }
+  </div>
+
+  @foreach (var toy in Model.EntityList)
+  {
+    if (toy.Amount == 0)
+    {
+      <div class="row alert-danger">
+        <div class="col-md-4"><h4>@toy.Name</h4></div>
+        <div class="col-md-4">
+          <img class="img-responsive" src="@(String.Format("../Image/Toys/{0}.jpg", toy.Name))" />
+        </div>
+        <div class="col-md-4"><h4>@toy.Amount</h4></div>
+      </div>
+    }
+    else
+    {
+      <div class="row">
+        <div class="col-md-4"><h4>@toy.Name</h4></div>
+        <div class="col-md-4">
+          <img class="img-responsive" src="@(String.Format("../Image/Toys/{0}.jpg", toy.Name))" />
+        </div>
+        <div class="col-md-4"><h4>@toy.Amount</h4></div>
+      </div>
+    }
+  }
+</div>
+<hr />
+@Html.ActionLink("Back", "../Home", null, new { @class = "btn btn-primary" })

@@ -16,46 +16,48 @@ namespace ManagementOfSantaClaus.Classes
       }
     }
 
-    public IEnumerable<Order> GetAllOrder()
+    public IEnumerable<Order> GetAllOrders()
     {
-      IMongoCollection<Order> orderCollection = database.GetCollection<Order>("orders");
-      return orderCollection.Find(new BsonDocument()).SortByDescending(t => t.Date).ToList();
+      IMongoCollection<Order> ordersCollection = database.GetCollection<Order>("orders");
+      List<Order> orders = ordersCollection.Find(new BsonDocument()).SortBy(o => o.Date).ToList();
+      foreach (Order order in orders)
+      {
+        DoNotDuplicateToy(order);
+      }
+      return orders;
     }
 
-    public IEnumerable<Toy> GetAllToy()
+    public IEnumerable<Toy> GetAllToys()
     {
-      IMongoCollection<Toy> toyCollection = database.GetCollection<Toy>("toys");
-      return toyCollection.Find(new BsonDocument()).ToList();
+      IMongoCollection<Toy> toysCollection = database.GetCollection<Toy>("toys");
+      return toysCollection.Find(new BsonDocument()).SortByDescending(t => t.Name).ToList();
     }
 
     public Order GetOrder(string id)
     {
       IMongoCollection<Order> orderCollection = database.GetCollection<Order>("orders");
-      return orderCollection.Find(_ => _.ID == id).FirstOrDefault();
+      Order order = orderCollection.Find(_ => _.Id == id).FirstOrDefault();
+      return DoNotDuplicateToy(order);
     }
 
     public Toy GetToy(string id)
     {
       IMongoCollection<Toy> toyCollection = database.GetCollection<Toy>("toys");
-      return toyCollection.Find(_ => _.ID == id).FirstOrDefault();
+      return toyCollection.Find(_ => _.Id == id).FirstOrDefault();
     }
 
     public User GetUser(User user)
     {
       IMongoCollection<User> userCollection = database.GetCollection<User>("users");
-      return userCollection.Find(new BsonDocument()).FirstOrDefault();
-      //return userCollection.Find(_ => _.ScreenName == user.ScreenName && _.Password == user.Password).FirstOrDefault();
+      return userCollection.Find(_ => _.Email == user.Email && _.Password == user.Password).FirstOrDefault();
     }
 
     public bool UpdateOrder(Order order)
     {
       IMongoCollection<Order> orderCollection = database.GetCollection<Order>("orders");
-      var filter = Builders<Order>.Filter.Eq("_id", ObjectId.Parse(order.ID));
+      var filter = Builders<Order>.Filter.Eq("_id", ObjectId.Parse(order.Id));
       var update = Builders<Order>.Update
-          .Set("kid", order.Kid)
-          .Set("status", order.Status)
-          .Set("toy", order.Toys)
-          .Set("requestDate", order.Date);
+          .Set("status", order.Status);
       try
       {
         orderCollection.UpdateOne(filter, update);
@@ -70,10 +72,8 @@ namespace ManagementOfSantaClaus.Classes
     public bool UpdateToy(Toy toy)
     {
       IMongoCollection<Toy> toyCollection = database.GetCollection<Toy>("toys");
-      var filter = Builders<Toy>.Filter.Eq("_id", ObjectId.Parse(toy.ID));
+      var filter = Builders<Toy>.Filter.Eq("name", toy.Name);
       var update = Builders<Toy>.Update
-          .Set("name", toy.Name)
-          .Set("cost", toy.Cost)
           .Set("amount", toy.Amount);
       try
       {
@@ -84,6 +84,28 @@ namespace ManagementOfSantaClaus.Classes
       {
         return false;
       }
+    }
+
+    public Order DoNotDuplicateToy(Order order)
+    {
+        bool toyIsNotDuplicated;
+        List<Toy> toyList = new List<Toy>();
+        foreach (Toy kidRequestToy in order.Toys)
+        {
+          toyIsNotDuplicated = true;
+          foreach (Toy toy in toyList)
+          {
+            if (toy.Name.Equals(kidRequestToy.Name))
+            {
+              toyIsNotDuplicated = false;
+              break;
+            }
+          }
+          if (toyIsNotDuplicated)
+            toyList.Add(kidRequestToy);
+        }
+        order.Toys = toyList;
+        return order;
     }
   }
 }

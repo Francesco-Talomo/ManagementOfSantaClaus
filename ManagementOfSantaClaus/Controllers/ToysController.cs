@@ -1,8 +1,5 @@
 ﻿using ManagementOfSantaClaus.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ManagementOfSantaClaus.Controllers
@@ -11,11 +8,34 @@ namespace ManagementOfSantaClaus.Controllers
   {
     public ActionResult Index()
     {
-      Classes.MongoDB db = new Classes.MongoDB();
-      var toys = db.GetAllToy();
-      Toys model = new Toys();
-      model.EntityList = toys.ToList();
-      return View(model);
+      if (Session["IsAdmin"] != null)
+      {
+        Classes.MongoDB db = new Classes.MongoDB();
+        var toys = db.GetAllToys();
+        Toys model = new Toys();
+        model.EntityList = toys.ToList();
+        return View(model);
+      }
+      else
+      {
+        return RedirectToAction("../Users/Login");
+      }
+    }
+
+    public ActionResult MissingToy()
+    {
+      if (Session["IsAdmin"] != null)
+      {
+        Classes.MongoDB db = new Classes.MongoDB();
+        var toys = db.GetAllToys();
+        Toys model = new Toys();
+        model.EntityList = toys.ToList();
+        return View(model);
+      }
+      else
+      {
+        return RedirectToAction("../Users/Login");
+      }
     }
   }
 }

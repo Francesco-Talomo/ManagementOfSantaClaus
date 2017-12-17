@@ -1,31 +1,62 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+  ViewBag.Title = "Home Page";
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+  <h1>MANAGEMENT FOR CHRISTMAS</h1>
+  <h2 style="text-align:center;">Welcome !</h2>
+  <p class="lead">Dashing thru the snow, in a one-horse open sleigh
+Over the fields we go, laughing all the way
+Bells on bob-tail ring, making spirits bright
+What fun it is to ride and sing
+A sleighing song tonight. Oh
+Jingle bells! Jingle bells! Jingle all the way!
+Oh what fun it is to ride
+In a one-horse open sleigh
+Jingle bells! Jingle bells! Jingle all the way!
+Oh what fun it is to ride
+In a one-horse open sleigh
+A day or two ago, I thought I’d take a ride
+And soon Miss Fanny Bright, was seated by my side
+The horse was lean and lank, misfortune seemed his lot
+He got into a drifted bank
+And so we got upset
+Jingle bells! Jingle bells! Jingle all the way!
+Oh what fun it is to ride
+In a one-horse open sleigh
+Jingle bells! Jingle bells! Jingle all the way!
+Oh what fun it is to ride
+In a one-horse open sleigh
+Now the ground in white, go it while you’re still young
+Take the girls tonight, and sing this sleighing song
+Just get a bob-tailed bay, two forty for his speed
+Then hitch him to an open sleigh
+And crack you’ll take the lead
+Jingle bells! Jingle bells! Jingle all the way!
+Oh what fun it is to ride
+In a one-horse open sleigh
+Jingle bells! Jingle bells! Jingle all the way!
+Oh what fun it is to ride
+In a one-horse open sleigh</p>
+@if (Session["ScreenName"] == null)
+{
+  @Html.ActionLink("Log In", "Login", "Users", null, new { @class = "btn btn-primary" })
+}
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+  <div class="row">
+    <div class="col-md-5 jumbotron">
+      <h2>TOYS</h2>
+      <p>
+        View all toys.
+      </p>
+      @Html.ActionLink("Toys", "Index", "Toys", null, new { @class = "btn btn-primary" })
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <div class="col-md-2">
+      </div>
+      <div class="col-md-5 jumbotron">
+        <h2>ORDERS</h2>
+        <p>View all orders.</p>
+        @Html.ActionLink("Toys", "Index", "Orders", null, new { @class = "btn btn-primary" })
+      </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>

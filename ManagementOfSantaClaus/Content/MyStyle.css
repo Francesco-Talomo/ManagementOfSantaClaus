@@ -1,0 +1,118 @@
+﻿body {
+  background-image: url('../Image/natale_stelline_palle.jpg');
+}
+
+h2, footer {
+  color: white;
+  text-align: center;
+}
+
+.navbar-brand img {
+  width: 20px;
+  height: 20px;
+}
+
+div.navbar-header img {
+  width: 20px;
+  height: 20px;
+}
+
+.navbar-inverse {
+  background-color: black;
+  /*background-image: url('../Image/navbar.jpg');*/
+}
+
+.jumbotron {
+  background-color: white;
+}
+
+  .jumbotron h2, hr {
+    color: black;
+  }
+
+  .jumbotron hr {
+    border-top: 1px solid;
+  }
+
+.dl-horizontal dt {
+  width: 220px;
+}
+
+.dl-horizontal dd {
+  margin-left: 260px;
+}
+
+table.table tbody tr {
+  transition: filter 2s;
+}
+
+  table.table tbody tr:hover {
+    /*background-color: rgba(1, 1, 1, 0.1);*/
+    /*filter: brightness(90%);*/ /*grayscale(50%);*/
+    opacity: 0.75;
+    box-shadow: inset 0 0 0 1px black;
+  }
+
+tr.InProgress td a {
+  color:black;
+}
+
+tr.MissingToy td a {
+  color: red;
+}
+
+tr.Ready td a {
+  color: green;
+}
+
+tr.Done td a {
+  color: blue;
+}
+
+img.img-responsive {
+  width: 60px;
+  height: 60px;
+}
+/*
+.navbar {
+  background-color: black;
+}
+
+.nav navbar-nav li a {
+  text-decoration: white;
+}
+
+  .nav navbar-nav li a:hover {
+    background-color: green;
+  }
+
+.navbar-brand a img {
+  height: 30px;
+  width: 30px;
+}
+
+.navbar-toggle {
+  background-color: white;
+}*/
+
+/*.icon-bar {
+  background-color: black;
+}
+
+.sr-only {
+  background-color: white;
+}
+
+.btn {
+  outline: none;
+}
+
+.btn-default:hover {
+  border: 2px solid green;
+  background-color: green;
+}
+
+.bg-gray:hover {
+  border: 2px solid green;
+  background-color: green;
+}*/

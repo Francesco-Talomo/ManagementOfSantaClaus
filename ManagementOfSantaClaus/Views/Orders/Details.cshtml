@@ -1,0 +1,79 @@
+﻿@using ManagementOfSantaClaus.Classes
+@model ManagementOfSantaClaus.Models.Order
+
+@{
+  ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<hr />
+
+<div class="jumbotron">
+  <h3>Order</h3>
+  <hr />
+  <dl class="dl-horizontal">
+    <dt>
+      @Html.DisplayNameFor(model => model.Kid)
+    </dt>
+
+    <dd>
+      @Html.DisplayFor(model => model.Kid)
+    </dd>
+
+    <dt>
+      @Html.DisplayNameFor(model => model.Status)
+    </dt>
+
+    <dd>
+      @Html.DisplayFor(model => model.Status)
+    </dd>
+
+    <dt>
+      @Html.DisplayNameFor(model => model.Date)
+    </dt>
+
+    <dd>
+      @Html.DisplayFor(model => model.Date)
+    </dd>
+
+    <dt>
+      @Html.DisplayNameFor(model => model.Toys)
+    </dt>
+
+    <dd>
+      @foreach (var toy in Model.Toys)
+      {
+        @Html.DisplayFor(model => toy.Name)
+        <br />
+      }
+    </dd>
+
+    @if (Session["IsAdmin"].Equals(true))
+    {
+      <dt>
+        @Html.DisplayName("Tot Cost")
+      </dt>
+
+      <dd>
+        @foreach (var toy in Model.Toys)
+        {
+          foreach (var toyForCost in Model.ToyList)
+          {
+            if (toy.Name == toyForCost.Name)
+            {
+              Model.TotCost += toyForCost.Cost;
+            }
+          }
+        }
+        @Html.DisplayFor(model => model.TotCost)
+      </dd>
+    }
+  </dl>
+</div>
+<p>
+  @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-primary" })
+  @if (Session["IsAdmin"].Equals(false) && !Model.Status.Equals(StatusType.Done))
+  {
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" })
+  }
+</p>
