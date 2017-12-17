@@ -28,7 +28,7 @@ namespace ManagementOfSantaClaus.Controllers
 
     public ActionResult Details(string id)
     {
-      if (Session["IsAdmin"] != null && Session["IsAdmin"].Equals(true))
+      if (Session["IsAdmin"] != null)
       {
         Classes.MongoDB db = new Classes.MongoDB();
         var order = db.GetOrder(id);
@@ -51,7 +51,7 @@ namespace ManagementOfSantaClaus.Controllers
 
     public ActionResult Edit(string id)
     {
-      if (Session["IsAdmin"] != null)
+      if (Session["IsAdmin"] != null && Session["IsAdmin"].Equals(false))
       {
         Classes.MongoDB db = new Classes.MongoDB();
         ViewBag.StatusTypes = new StatusTypes();

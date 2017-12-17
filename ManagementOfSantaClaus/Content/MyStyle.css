@@ -52,7 +52,7 @@ table.table tbody tr {
   }
 
 tr.InProgress td a {
-  color:black;
+  color: black;
 }
 
 tr.MissingToy td a {
@@ -70,4 +70,8 @@ tr.Done td a {
 img.img-responsive {
   width: 60px;
   height: 60px;
+}
+
+p.btnHomePage a.btn.btn-primary {
+  margin-top: 10px;
 }
