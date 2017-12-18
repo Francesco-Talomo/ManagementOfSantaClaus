@@ -93,7 +93,7 @@
             }
           }
         }
-        @Html.DisplayFor(model => model.TotCost)
+        @Html.Raw(string.Concat(Model.TotCost.ToString("F"),"€"))
       </dd>
     }
   </dl>

@@ -14,7 +14,6 @@
         <th>Kid</th>
         <th>Status</th>
         <th>Date</th>
-        <th>Toy</th>
         @if (Session["IsAdmin"].Equals(true))
       {
           <th>
@@ -31,17 +30,53 @@
 
       @foreach (var order in Model.OrdersList)
       {
-        Model.MissingToysList= new List<Toy>();
+        Model.MissingToysList = new List<Toy>();
         Model.TotCost = 0;
-        var textColor = StatusType.InProgress;
+        string textColor = StatusType.InProgress.ToString();
         if (order.Status.Equals(StatusType.Done))
         {
-          textColor = StatusType.Done;
+          textColor = StatusType.Done.ToString();
         }
         else if (order.Status.Equals(StatusType.Ready))
         {
-          textColor = StatusType.Ready;
+          textColor = StatusType.Ready.ToString();
         }
+
+        foreach (var toy in Model.ToysList)
+        {
+          int toyCount = 0;
+          foreach (var toyOrder in order.Toys)
+          {
+            if (toy.Name.Equals(toyOrder.Name))
+            {
+              toyCount++;
+            }
+          }
+          if (toy.Amount < toyCount)
+          {
+            Model.MissingToysList.Add(toy);
+          }
+        }
+        foreach (var toy in order.Toys)
+        {
+          foreach (var toyForCount in Model.ToysList)
+          {
+            if (toyForCount.Name == toy.Name)
+            {
+              if (Model.MissingToysList.Count != 0 && order.Status.Equals(StatusType.InProgress))
+              {
+                foreach (var toyColor in Model.MissingToysList)
+                {
+                  if (toyColor.Name.Equals(toy.Name))
+                  {
+                    textColor = "MissingToy";
+                  }
+                }
+              }
+            }
+          }
+        }
+
         <tr class="@textColor" onclick="location.href='@(Url.Action("Details", "Orders", new { id = order.Id }))'">
 
           <td>@Html.ActionLink(order.Kid, "Details", new { id = order.Id }, new { kid = order.Kid })</td>
@@ -55,54 +90,6 @@
           </td>
 
           <td> 
-            @foreach (var toy in Model.ToysList)
-            {
-              int toyCount = 0;
-              foreach (var toyOrder in order.Toys)
-              {
-                if (toy.Name.Equals(toyOrder.Name))
-                {
-                  toyCount++;
-                }
-              }
-              if (toy.Amount < toyCount)
-              {
-                Model.MissingToysList.Add(toy);
-              }
-            }
-
-
-            @foreach (var toy in order.Toys)
-            {
-              foreach (var toyForCount in Model.ToysList)
-              {
-                if (toyForCount.Name == toy.Name)
-                {
-                  if (Model.MissingToysList.Count == 0 || order.Status.Equals(StatusType.Done) || order.Status.Equals(StatusType.Ready))
-                  {
-                    @Html.ActionLink(toy.Name.ToString(), "Details", new { id = order.Id }, new { toy = toy.ToString() })
-                    <br />
-                  }
-                  else
-                  {
-                    foreach (var toyColor in Model.MissingToysList)
-                    {
-                      if (toyColor.Name.Equals(toy.Name))
-                      {
-                        @Html.ActionLink(toy.Name.ToString(), "Details", new { id = order.Id }, new { @style = "color:red", toy = toy.ToString() })
-                        <br />
-                      }
-                      else
-                      {
-                        @Html.ActionLink(toy.Name.ToString(), "Details", new { id = order.Id }, new { toy = toy.ToString() })
-                        <br />
-                      }
-                    }
-                  }
-                }
-              }
-            }
-
             @foreach (var toy in order.Toys)
             {
               if (Session["IsAdmin"].Equals(true))
@@ -116,12 +103,10 @@
                 }
               }
             }
-          </td>
 
-          <td>
             @if (Session["IsAdmin"].Equals(true))
             {
-              @Html.ActionLink(Model.TotCost.ToString("F"), "Details", new { id = order.Id }, new { toyCost = Model.TotCost.ToString() })
+              @Html.ActionLink(string.Concat(Model.TotCost.ToString("F"),"€"), "Details", new { id = order.Id }, new { toyCost = Model.TotCost.ToString() })
             }
             else if (!order.Status.Equals(StatusType.Done))
             {
