@@ -1,4 +1,5 @@
-﻿
+﻿@model ManagementOfSantaClaus.Models.Toys
+
 @{
   ViewBag.Title = "MissingToy";
 }
@@ -25,7 +26,7 @@
     }
   </div>
 
-  @foreach (var toy in Model.EntityList)
+  @foreach (var toy in Model.ToysList)
   {
     if (toy.Amount == 0)
     {

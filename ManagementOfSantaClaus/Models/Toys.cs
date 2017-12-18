@@ -5,6 +5,6 @@ namespace ManagementOfSantaClaus.Models
 {
   public class Toys
   {
-    public List<Toy> EntityList { get; set; }
+    public List<Toy> ToysList { get; set; }
   }
 }

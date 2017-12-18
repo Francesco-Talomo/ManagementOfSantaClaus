@@ -5,7 +5,7 @@ namespace ManagementOfSantaClaus.Models
 {
   public class Users
   {
-    public List<User> EntityList { get; private set; }
+    public List<User> UsersList { get; private set; }
 
   }
 }

@@ -24,7 +24,7 @@
     }
   </div>
 
-  @foreach (var toy in Model.EntityList)
+  @foreach (var toy in Model.ToysList)
   {
     <hr />
     <div class="row">
@@ -37,7 +37,7 @@
             <img class="img-responsive" src="@(String.Format("../Image/Toys/{0}.jpg", toy.Name))" />
           </div>
           <div class="col-md-3"><h4>@toy.Amount</h4></div>
-          <div class="col-md-3"><h4>@toy.Cost</h4></div>
+          <div class="col-md-3"><h4>@toy.Cost.ToString("F")</h4></div>
         }
         else
         {

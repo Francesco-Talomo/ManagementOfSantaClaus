@@ -13,7 +13,7 @@ namespace ManagementOfSantaClaus.Controllers
         Classes.MongoDB db = new Classes.MongoDB();
         var toys = db.GetAllToys();
         Toys model = new Toys();
-        model.EntityList = toys.ToList();
+        model.ToysList = toys.ToList();
         return View(model);
       }
       else
@@ -29,7 +29,7 @@ namespace ManagementOfSantaClaus.Controllers
         Classes.MongoDB db = new Classes.MongoDB();
         var toys = db.GetAllToys();
         Toys model = new Toys();
-        model.EntityList = toys.ToList();
+        model.ToysList = toys.ToList();
         return View(model);
       }
       else

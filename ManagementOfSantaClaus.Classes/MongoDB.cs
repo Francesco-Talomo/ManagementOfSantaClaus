@@ -22,7 +22,7 @@ namespace ManagementOfSantaClaus.Classes
       List<Order> orders = ordersCollection.Find(new BsonDocument()).SortBy(o => o.Date).ToList();
       foreach (Order order in orders)
       {
-        DoNotDuplicateToy(order);
+        //DoNotDuplicateToy(order);
       }
       return orders;
     }
@@ -37,7 +37,8 @@ namespace ManagementOfSantaClaus.Classes
     {
       IMongoCollection<Order> orderCollection = database.GetCollection<Order>("orders");
       Order order = orderCollection.Find(_ => _.Id == id).FirstOrDefault();
-      return DoNotDuplicateToy(order);
+      //return DoNotDuplicateToy(order);
+      return order;
     }
 
     public Toy GetToy(string id)

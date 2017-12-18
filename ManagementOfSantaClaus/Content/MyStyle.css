@@ -34,6 +34,10 @@ div.navbar-header img {
     border-top: 1px solid;
   }
 
+input {
+  margin: auto;
+}
+
 .dl-horizontal dt {
   width: 220px;
 }

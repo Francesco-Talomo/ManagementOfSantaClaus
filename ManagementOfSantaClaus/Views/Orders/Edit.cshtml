@@ -65,22 +65,33 @@
         <div class="col-md-10">
           @foreach (var toy in Model.Toys)
           {
-            foreach (var toyColor in Model.ToyList)
+            foreach (var toyForCount in Model.ToyList)
             {
-              if (toyColor.Name == toy.Name)
+              if (toyForCount.Name == toy.Name)
               {
-                if (toyColor.Amount > 0 || Model.Status.Equals(StatusType.Done) || Model.Status.Equals(StatusType.Ready))
+                if (Model.MissingToysList.Count == 0 || Model.Status.Equals(StatusType.Done) || Model.Status.Equals(StatusType.Ready))
                 {
                   @Html.DisplayFor(model => toy.Name)
                   <br />
                 }
                 else
                 {
-                  Model.EditToys = false;
-                  <font color="red">
-                    @Html.DisplayFor(model => toy.Name)
-                  </font>
-                  <br />
+                  foreach (var toyColor in Model.MissingToysList)
+                  {
+                    if (toyColor.Name.Equals(toy.Name))
+                    {
+                      Model.EditToys = false;
+                      <font color="red">
+                        @Html.DisplayFor(model => toy.Name)
+                      </font>
+                      <br />
+                    }
+                    else
+                    {
+                      @Html.DisplayFor(model => toy.Name)
+                      <br />
+                    }
+                  }
                 }
               }
             }
@@ -95,6 +106,14 @@
           </div>
         </div>
       }
+
+        @if (!Model.EditToys)
+        {
+          <font color="red">
+            @Html.Raw("Please check your Toys !")
+          </font>
+        }
+ 
     </div>
   }
 </div>
