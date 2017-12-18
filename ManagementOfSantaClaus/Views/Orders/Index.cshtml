@@ -106,7 +106,7 @@
 
             @if (Session["IsAdmin"].Equals(true))
             {
-              @Html.ActionLink(string.Concat(Model.TotCost.ToString("F"),"€"), "Details", new { id = order.Id }, new { toyCost = Model.TotCost.ToString() })
+              @Html.ActionLink(string.Concat(Model.TotCost.ToString("F")," €"), "Details", new { id = order.Id }, new { toyCost = Model.TotCost.ToString() })
             }
             else if (!order.Status.Equals(StatusType.Done))
             {

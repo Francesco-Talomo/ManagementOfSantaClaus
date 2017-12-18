@@ -34,18 +34,22 @@
         {
           <div class="col-md-3"><h4>@toy.Name</h4></div>
           <div class="col-md-3">
-            <img class="img-responsive" src="@(String.Format("../Image/Toys/{0}.jpg", toy.Name))" />
+            <div class="style_prevu_kit">
+              <img class="img-responsive" src="@(String.Format("../Image/Toys/{0}.jpg", toy.Name))" />
+            </div>
           </div>
           <div class="col-md-3"><h4>@toy.Amount</h4></div>
-          <div class="col-md-3"><h4>@string.Concat(toy.Cost.ToString("F"),"€")</h4></div>
+          <div class="col-md-3"><h4>@string.Concat(toy.Cost.ToString("F"), " €")</h4></div>
         }
         else
         {
           <div class="col-md-4"><h4>@toy.Name</h4></div>
           <div class="col-md-4">
-            <img class="img-responsive" src="@(String.Format("../Image/Toys/{0}.jpg", toy.Name))" />
+            <div class="style_prevu_kit">
+              <img class="img-responsive" src="@(String.Format("../Image/Toys/{0}.jpg", toy.Name))" />
+            </div>
           </div>
-          <div class="col-md-4"><h4>@toy.Amount</h4></div>
+            <div class="col-md-4"><h4>@toy.Amount</h4></div>
         }
       }
       else
@@ -57,18 +61,22 @@
               <h4>@toy.Name</h4>
             </div>
             <div class="col-md-3">
-              <img class="img-responsive" src="@(String.Format("../Image/Toys/{0}.jpg", toy.Name))" />
+              <div class="style_prevu_kit">
+                <img class="img-responsive" src="@(String.Format("../Image/Toys/{0}.jpg", toy.Name))" />
+              </div>
             </div>
-            <div class="col-md-3"><h4>@toy.Amount</h4></div>
-            <div class="col-md-3"><h4>@string.Concat(toy.Cost.ToString("F"), "€")</h4></div>
+              <div class="col-md-3"><h4>@toy.Amount</h4></div>
+              <div class="col-md-3"><h4>@string.Concat(toy.Cost.ToString("F"), " €")</h4></div>
           }
           else
           {
             <div class="col-md-4"><h4>@toy.Name</h4></div>
             <div class="col-md-4">
-              <img class="img-responsive" src="@(String.Format("../Image/Toys/{0}.jpg", toy.Name))" />
+              <div class="style_prevu_kit">
+                <img class="img-responsive" src="@(String.Format("../Image/Toys/{0}.jpg", toy.Name))" />
+              </div>
             </div>
-            <div class="col-md-4"><h4>@toy.Amount</h4></div>
+              <div class="col-md-4"><h4>@toy.Amount</h4></div>
           }
         </font>
       }
